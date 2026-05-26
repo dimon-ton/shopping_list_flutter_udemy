@@ -21,8 +21,8 @@ class _NewItemState extends State<NewItem> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       print(_enteredName);
-      print(_enteredName);
       print(_enteredQuantity);
+      print(_selectedCategory);
     }
   }
 
