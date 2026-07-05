@@ -31,11 +31,17 @@ class _GloceryListState extends State<GloceryList> {
 
     final response = await http.get(url);
 
-    print(response.statusCode);
     if (response.statusCode >= 400) {
       setState(() {
         _error = 'Failed to fetch data. Please try again later.';
       });
+    }
+
+    if (response.body == 'null') {
+      setState(() {
+        _isLoading = false;
+      });
+      return;
     }
 
     final Map<String, dynamic> listData = json.decode(response.body);
@@ -91,6 +97,7 @@ class _GloceryListState extends State<GloceryList> {
     final response = await http.delete(url);
 
     if (response.statusCode >= 400) {
+      // optional: Show error message
       setState(() {
         _groceryItems.insert(index, item);
       });
